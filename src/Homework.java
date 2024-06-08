@@ -11,6 +11,8 @@ public class Homework extends SuperKarel {
 
     /* You fill the code here */
     public void run() {
+        setBeepersInBag(1000);
+
         w = 1;
         h = 1;
         total_count = 0;
