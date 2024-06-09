@@ -1,6 +1,5 @@
 import stanford.karel.SuperKarel;
 
-
 public class Homework extends SuperKarel {
 
     private int w;
@@ -34,22 +33,39 @@ public class Homework extends SuperKarel {
 
         // divide based on the state
         if (state == 2){
+            // w is even and h is odd
             double_lines('w');
             single_lines('h');
         } else if (state == 3) {
+            // w is odd h is even
             single_lines('w');
             double_lines('h');
         } else if ( state == 10) {
+            // w and h are even
             double_lines('w');
             double_lines('h');
         } else if (state == 11) {
+            // w and h are odd
             single_lines('w');
             single_lines('h');
         } else if (state == 4 || state == 5 || state == 6) {
+            // long horizontal
             with_jump('w');
+            if (h == 2){
+                turnLeft();
+                move_n_no_beeper();
+                turnRight();
+                with_jump('w');
+            }
         } else if (state == 7 || state == 8 || state == 9) {
+            // long vertical
             turnLeft();
             with_jump('h');
+            if (w == 2){
+                move_n_no_beeper();
+                turnLeft();
+                with_jump('h');
+            }
         } else if (w == 2 & h == 2) {
             zig_zag();
         } else {
@@ -80,13 +96,13 @@ public class Homework extends SuperKarel {
             state = 1;
         }else if (w <= 2 || h <= 2) {
             if (w > h){
-                if((w - 3 != 0) && ((w - 3) % 4 == 0) || ( (w - 4 != 0) && (w - 4) % 4 == 0)){
+                if((w - 3 != 0) && ((w - 3) % 4 == 0) || ((w - 4 != 0) && (w - 4) % 4 == 0)){
                     state = 4;
                     jump = (w - 3) / 4;
                     if ((w - 4 != 0) && (w - 4) % 4 == 0){
                         is_extra = true;
                     }
-                }else if (((w - 2) % 3 == 0) || ( (w - 3 != 0) &&  (w - 3) % 3 == 0)) {
+                }else if (((w - 2) % 3 == 0) || ((w - 3 != 0) &&  (w - 3) % 3 == 0)) {
                     state = 5;
                     jump = (w - 2) / 3;
                     if ((w - 3 != 0) &&  (w - 3) % 3 == 0){
@@ -102,13 +118,13 @@ public class Homework extends SuperKarel {
                     state = 1;
                 }
             }else{
-                if((h - 3 != 0) && ((h - 3) % 4 == 0) || ( (h - 4 != 0) && (h - 4) % 4 == 0)){
+                if((h - 3 != 0) && ((h - 3) % 4 == 0) || ((h - 4 != 0) && (h - 4) % 4 == 0)){
                     state = 7;
                     jump = (h - 3) / 4;
                     if ((h - 4 != 0) && (h - 4) % 4 == 0){
                         is_extra = true;
                     }
-                }else if (((h - 2) % 3 == 0) || ( (h - 3 != 0) &&  (h - 3) % 3 == 0)) {
+                }else if (((h - 2) % 3 == 0) || ((h - 3 != 0) &&  (h - 3) % 3 == 0)) {
                     state = 8;
                     jump = (h - 2) / 3;
                     if ((h - 3 != 0) &&  (h - 3) % 3 == 0){
